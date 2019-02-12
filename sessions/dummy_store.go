@@ -2,12 +2,13 @@ package sessions
 
 import (
 	//"petram/config"
-	"sampleapp/crypto"
+	"../crypto"
 	//consts "petram/constants"
 	//env "petram/environment"
 
 	"errors"
 	"net/http"
+	"fmt"
 )
 
 type DummyStore struct {
@@ -45,6 +46,7 @@ func (s *DummyStore) Get(r *http.Request, cookieName string) (*DummySession, err
 	}
 
 	sessionID := cookie.Value
+	fmt.Printf("cookie.Value : %s \n", cookie.Value)
 	// restore session
 	buffer, exists := s.database[sessionID]
 	if !exists {
@@ -77,8 +79,11 @@ func (s *DummyStore) Save(r *http.Request, w http.ResponseWriter, session *Dummy
 		Value: session.ID,
 		Path: "/",
 	}
-
+	fmt.Printf("Cookie Name, Value, Path,: %s, %s, %s \n", session.Name(),session.ID, "/")
 	http.SetCookie(session.writer, c)
+
+
+
 	return nil
 }
 

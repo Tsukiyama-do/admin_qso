@@ -1,0 +1,42 @@
+{{ template "head" }}
+{{ if .isLoggedIn }}
+    <body>
+        <h1>QSL CARDS MAIN for {{ .username }}.</h1>
+        <form id="signout-form" action="/user/logout" method="POST">
+            <input type="submit" value="ログアウト">
+        </form>
+        <label>QSLCARDSメイン画面</label><br />
+        <label>QSLCARDS検索・変更画面</label><br />
+
+        <input style="width: 20%; padding: 10px;"  type="button" id="btn-search" value="QSLCARDS検索" /><br />
+        <input style="width: 20%; padding: 10px;"  type="button" id="btn-src-rst" value="クリア" /><br />
+
+        <div id="mini-tail">
+        </div>
+        <label>QSLCARDS追加画面</label><br />
+        <input style="width: 20%; padding: 10px;"  type="button" id="btn-insert" value="QSLCARDS追加" /><br />
+        <div id="mini-tail2">
+        </div>
+        <div id="sql-result">
+        </div>
+        <label> {{ .sql_result }} </label>
+
+        <label>メイン画面</label><br />
+        <a href="//{{ .domainport }}/">メイン画面</a><br />
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/assets/admin-qso-assets.js"></script>
+
+    </body>
+
+{{ else }}
+    <body>
+        <h1>Welcome to admin_qso.</h1>
+        <ul>
+            <li><a href="//{{ .domainport }}/login">login</a>
+            <li><a href="//{{ .domainport }}/signup">signup</a>
+        </ul>
+    </body>
+{{ end }}
+{{ template "foot" }}

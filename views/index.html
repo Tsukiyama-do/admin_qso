@@ -6,13 +6,16 @@
         <form id="signout-form" action="/user/logout" method="POST">
             <input type="submit" value="ログアウト">
         </form>
+        <label>メイン画面</label><br />
+        <a href="//{{ .domainport }}/qsl/qslmain">QSLCARDS検索画面</a><br />
+
     </body>
 {{ else }}
     <body>
-        <h1>Welcome to SampleApp.</h1>
+        <h1>Welcome to admin_qso.</h1>
         <ul>
-            <li><a href="//localhost:8080/login">login</a>
-            <li><a href="//localhost:8080/signup">signup</a>
+            <li><a href="//{{ .domainport }}/login">login</a>
+            <li><a href="//{{ .domainport }}/signup">signup</a>
         </ul>
     </body>
 {{ end }}

@@ -1,14 +1,25 @@
 package main
 
 import (
-	//"sampleapp/config"
-	"sampleapp/routes"
-	"sampleapp/sessions"
-
+	//"admin_qso/config"
+	"./routes"
+	"./sessions"
+	"os"
+  "github.com/fvbock/endless"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+
+	//  パラメータチェック
+	    if len(os.Args) == 2 {
+	      if os.Args[1] == "release" {
+	        gin.SetMode(gin.ReleaseMode)
+	      }
+	    }
+
+	//
+
 	router := gin.Default()
 	router.LoadHTMLGlob("views/*.html")
 	router.Static("/assets", "./assets")
@@ -23,10 +34,22 @@ func main() {
 		user.POST("/logout", routes.UserLogOut)
 	}
 
+	qsl := router.Group("/qsl")
+	{
+		qsl.GET("/qslmain", routes.Qslmain)
+		qsl.POST("/qslselect", routes.Qslselectp)
+		qsl.POST("/qslupddel", routes.Qslupddelp)
+		qsl.POST("/qslinsert", routes.Qslinsertp)
+	}
+
 	router.GET("/", routes.Home)
 	router.GET("/login", routes.LogIn)
 	router.GET("/signup", routes.SignUp)
 	router.NoRoute(routes.NoRoute)
 
-	router.Run(":8080")
+//	router.Run(":8081")
+
+//  Start server with graceful shutdown function
+	endless.ListenAndServe(":8081", router)
+
 }

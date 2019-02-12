@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"sampleapp/config"
-	"sampleapp/sessions"
+	"../config"
+	"../sessions"
 
 	"net/http"
 	"github.com/gin-gonic/gin"
