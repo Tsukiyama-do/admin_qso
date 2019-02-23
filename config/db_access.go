@@ -185,7 +185,7 @@ func (qsl *QslCardsModel) QSLRecords() (S_QSLCARDS, error) {
 	      var sz QslCardsModel
 	      err = rows.Scan(&sz.ID, &sz.CALLSIGN, &sz.DATETIME, &sz.FILES)
 				if err != nil { return nil, err }   // エラー時は、エラーを返却して抜ける
-				log.Printf("ID : %d, CALLSIGN : %s, DATETIME : %s, FILEs: %s \n", sz.ID, sz.CALLSIGN, sz.DATETIME, sz.FILES)
+//				log.Printf("ID : %d, CALLSIGN : %s, DATETIME : %s, FILEs: %s \n", sz.ID, sz.CALLSIGN, sz.DATETIME, sz.FILES)
 				sq = append(sq, sz)
 	}
 
@@ -238,4 +238,49 @@ func (qsl *QslCardsModel) QSLDelete() error {
 	log.Printf("affected by QSLDelete : %d\n", affect)
 
 	return nil
+}
+
+
+func (qsl *QslCardsModel) QSLCheck() error {
+
+	// データベースのコネクションを開く
+	db, err := sql.Open("sqlite3", "../qso/qsldb/qsldb_main.db")
+  if err != nil { return  err }   // エラー時は、エラーを返却して抜ける
+	defer db.Close()
+
+	// SQL Select proc
+	var cnt int = 0
+
+	rows, err := db.Query("SELECT COUNT(*) as cnt FROM QSLCARDS WHERE ID=?", qsl.ID)
+		for rows.Next() {
+    		err = rows.Scan(&cnt)
+				if err != nil { return  err }   // エラー時は、エラーを返却して抜ける
+    }
+		if cnt > 0 {
+								return  errors.New("Data_Found!")
+		}
+	return nil
+
+}
+
+func (qsl *QslCardsModel) QSLInsert() error {
+
+	// データベースのコネクションを開く
+	db, err := sql.Open("sqlite3", "../qso/qsldb/qsldb_main.db")
+  if err != nil { return  err }   // エラー時は、エラーを返却して抜ける
+	defer db.Close()
+
+	// SQL UPDATE proc
+  res, err := db.Exec(
+    `INSERT INTO QSLCARDS VALUES (?, ?, ?, ?)`,
+     qsl.ID, qsl.CALLSIGN,qsl.DATETIME,qsl.FILES )
+	if err != nil { return  err }   // エラー時は、エラーを返却して抜ける
+
+  // 削除されたレコード数
+  affect, err := res.RowsAffected()
+	if err != nil { return  err }   // エラー時は、エラーを返却して抜ける
+	log.Printf("affected by QSLInsert : %d\n", affect)
+
+	return nil
+
 }

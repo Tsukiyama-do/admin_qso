@@ -40,6 +40,10 @@ func main() {
 		qsl.POST("/qslselect", routes.Qslselectp)
 		qsl.POST("/qslupddel", routes.Qslupddelp)
 		qsl.POST("/qslinsert", routes.Qslinsertp)
+		qsl.GET("/uploads", routes.Qsluploads)
+		qsl.POST("/fileselect", routes.Fileselectp)
+		qsl.POST("/fileupload", routes.Fileuploadp)
+
 	}
 
 	router.GET("/", routes.Home)

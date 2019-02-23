@@ -1,24 +1,25 @@
 {{ template "head" }}
 {{ if .isLoggedIn }}
     <body>
-        <h1>QSL CARDS MAIN for {{ .username }}.</h1>
+        <h1>QSL CARDS FILE UPLOAD for {{ .username }}.</h1>
         <form id="signout-form" action="/user/logout" method="POST">
             <input type="submit" value="ログアウト">
         </form>
-        <label>QSLCARDSメイン画面</label><br />
-        <label>QSLCARDS検索・変更画面</label><br />
+        <label>QSLCARDS ファイル アップロード画面</label><br />
 
-        <input style="width: 20%; padding: 10px;"  type="button" id="btn-search" value="QSLCARDS検索" /><br />
-        <input style="width: 20%; padding: 10px;"  type="button" id="btn-src-rst" value="クリア" /><br />
+        <input style="width: 20%; padding: 10px;"  type="button" id="btn-fsearch" value="QSLファイル検索" /><br />
+        <input style="width: 20%; padding: 10px;"  type="button" id="btn-fsrc-rst" value="クリア" /><br />
 
-        <div id="mini-tail">
+        <div id="mini-ftail">
         </div>
-        <input style="width: 20%; padding: 10px;" type="button" id="btn-upddel" value="上を確定" /><br />
-        <label>QSLCARDS追加画面</label><br />
-        <input style="width: 20%; padding: 10px;"  type="button" id="btn-insert" value="QSLCARDS追加" /><br />
-        <div id="mini-tail2">
+        <label>QSLCARDSファイル追加画面</label><br />
+        <form id="upload_form">
+           <input style="width: 20%; padding: 10px;" type="file" name="qslupload" accept="image/*,.pdf" ><br />
+
+           <input  style="width: 20%; padding: 10px;" type="button" onclick="file_upload()" value="Upload a file">
+        </form>
+        <div id="mini-ftail2">
         </div>
-        <input style="width: 20%; padding: 10px;" type="button" id="btn-inssub" value="追加分確定" /><br />
         <div id="sql-result">
         </div>
         <label> {{ .sql_result }} </label>

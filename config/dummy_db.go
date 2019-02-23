@@ -3,7 +3,7 @@ package config
 import (
 	"../crypto"
 //	"errors"
-	"log"
+//	"log"
 
 	"strconv"
 )
@@ -130,18 +130,18 @@ func (db *DummyDatabase) SelectQSL() (string, error) {
 	mj, err := mm.QSLRecords()
 	if err != nil {  return s_json_cal, err 	}
 
-	log.Printf("QSLRec len is %d", len(mj))
-	log.Printf("QSLRec is %v", mj[0])
+//	log.Printf("QSLRec len is %d", len(mj))
+//	log.Printf("QSLRec is %v", mj[0])
 
 	s_json_cal = `[ `
 	for _, items := range mj {
 			s_json_cal = s_json_cal + `{ "ID" : "` + strconv.Itoa(items.ID) + `" , "CALLSIGN" :  "` + items.CALLSIGN + `" , "DATETIME":  "` + items.DATETIME + `" , "FILES":  "` + items.FILES + `" },`
 	}
-
+/*
 	for _, items := range mj {
 			log.Printf( `{ "ID" : "` + strconv.Itoa(items.ID) + `" , "CALLSIGN":  "` + items.CALLSIGN + `" , "DATETIME":  "` + items.DATETIME + `" , "FILES":  "` + items.FILES + `" },` )
 	}
-
+*/
 	if len(s_json_cal) > 0 {        //  文字列末尾の　, を削除している。
 		 s_json_cal = string(s_json_cal[:(len(s_json_cal)-1)])
 	}
@@ -152,17 +152,20 @@ func (db *DummyDatabase) SelectQSL() (string, error) {
 }
 
 
-func (db *DummyDatabase) UpdateQSL(id int, callsign string, datetime string, files string) error {
+func (db *DummyDatabase) UpdateQSL(id string, callsign string, datetime string, files string) error {
+
+	i_id, err := strconv.Atoi(id)
+	err = nil
 
   mm := QslCardsModel{
-			ID : id ,
+			ID : i_id ,
 			CALLSIGN : callsign ,
 			DATETIME :  datetime ,
 			FILES : files ,
 			iud : "U" ,
 	}
 
-	err := mm.QSLUpdate()
+	err = mm.QSLUpdate()
 	if err != nil {  return err 	}
 
 	return nil
@@ -170,15 +173,43 @@ func (db *DummyDatabase) UpdateQSL(id int, callsign string, datetime string, fil
 }
 
 
-func (db *DummyDatabase) DeleteQSL(id int) error {
+func (db *DummyDatabase) DeleteQSL(id string) error {
+
+	i_id, err := strconv.Atoi(id)
+	err = nil
 
   mm := QslCardsModel{
-			ID : id ,
+			ID : i_id ,
 			iud : "D" ,
 	}
 
-	err := mm.QSLDelete()
+	err = mm.QSLDelete()
 	if err != nil {  return err 	}
+
+	return nil
+
+}
+
+
+func (db *DummyDatabase) InsertQSL(id string, callsign string, datetime string, files string) error {
+
+	i_id, err := strconv.Atoi(id)
+	err = nil
+
+  mm := QslCardsModel{
+			ID : i_id ,
+			CALLSIGN : callsign ,
+			DATETIME :  datetime ,
+			FILES : files ,
+			iud : "I" ,
+	}
+
+	err = mm.QSLCheck()
+	if err != nil {  return err 	}
+
+	err = mm.QSLInsert()
+	if err != nil {  return err 	}
+
 
 	return nil
 
