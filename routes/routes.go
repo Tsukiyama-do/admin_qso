@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const c_host string = "localhost:8081"
+const c_host string = "localhost:50005"
 
 func Home(ctx *gin.Context) {
 	var user *config.DummyUserModel

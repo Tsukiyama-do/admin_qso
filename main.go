@@ -54,6 +54,6 @@ func main() {
 //	router.Run(":8081")
 
 //  Start server with graceful shutdown function
-	endless.ListenAndServe(":8081", router)
+	endless.ListenAndServe(":50005", router)
 
 }
