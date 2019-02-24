@@ -20,7 +20,7 @@ import (
 //	"bytes"
 )
 
-const up_path string = "/home/yuichi/github.com/Tsukiyama-do/qso/uploads/"
+const up_path string = "../qso/uploads/"
 
 
 func Qslmain(ctx *gin.Context) {

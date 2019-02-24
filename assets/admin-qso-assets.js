@@ -273,7 +273,7 @@ $(document).ready(function(){
             		// 正常系の処理を書く
       //          console.log(result);
 
-                var bodyhead = $('<div id="tablebeforef"> /home/yuichi/github.com/Tsukiyama-do/qso/uploads 配下のファイルは以下です。</div>')
+                var bodyhead = $('<div id="tablebeforef"> ~/github.com/Tsukiyama-do/qso/uploads 配下のファイルは以下です。</div>')
                 var bodytail = $('<div id="tableafterf">処理は終了です。</div>')
 
                 var tabledef = $('<table class="table" id="down-tablef" bordercolor="#000000">');
