@@ -3,12 +3,17 @@ package routes
 import (
 	"../sessions"
 	"../config"
+	"../env"
 
 	"net/http"
 	"github.com/gin-gonic/gin"
 )
 
-const c_host string = "localhost:50005"
+
+
+// const c_port string = ":50005"
+
+
 
 func Home(ctx *gin.Context) {
 	var user *config.DummyUserModel
@@ -19,7 +24,7 @@ func Home(ctx *gin.Context) {
 		println("Unhappy home")
 		println("  sessionID: " + session.ID)
 		session.Save()
-		ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport": c_host, })
+		ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport": env.S_host() ,  })
 		return
 	}
 
@@ -34,18 +39,18 @@ func Home(ctx *gin.Context) {
 		"isLoggedIn": true,
 		"username": user.Username,
 		"email": user.Email,
-		"domainport": c_host,
+		"domainport": env.S_host() ,
 	})
 }
 
 func LogIn(ctx *gin.Context) {
-	ctx.HTML(http.StatusOK, "login.html", gin.H{ "domainport": c_host, })
+	ctx.HTML(http.StatusOK, "login.html", gin.H{ "domainport": env.S_host() , })
 }
 
 func SignUp(ctx *gin.Context) {
-	ctx.HTML(http.StatusOK, "signup.html", gin.H{ "domainport": c_host, })
+	ctx.HTML(http.StatusOK, "signup.html", gin.H{ "domainport": env.S_host() , })
 }
 
 func NoRoute(ctx *gin.Context) {
-	ctx.JSON(http.StatusNotFound, gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found", "domainport": c_host, })
+	ctx.JSON(http.StatusNotFound, gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found", "domainport": env.S_host() , })
 }

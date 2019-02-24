@@ -3,6 +3,7 @@ package routes
 import (
 	"../config"
 	"../sessions"
+	"../env"
 
 	"net/http"
 	"github.com/gin-gonic/gin"
@@ -32,7 +33,7 @@ func Qslmain(ctx *gin.Context) {
 	if !exists {
 		println("Unknown sesssion!  sessionID: " + session.ID)
 		session.Save()
-		ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport": c_host, })
+		ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport": env.S_host(), })
 		return
 	}
 
@@ -45,7 +46,7 @@ func Qslmain(ctx *gin.Context) {
 		"isLoggedIn": true,
 		"username": user.Username,
 		"email": user.Email,
-		"domainport": c_host,
+		"domainport":  env.S_host(),
 	})
 
 //	ctx.Redirect(http.StatusSeeOther, "/")
@@ -64,7 +65,7 @@ func Qslselectp(ctx *gin.Context) {
 		if !exists {
 			println("Unknown sesssion!  sessionID: " + session.ID)
 			session.Save()
-			ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport": c_host, })
+			ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport": env.S_host(), })
 			return
 		}
 
@@ -118,7 +119,7 @@ func Qslupddelp(ctx *gin.Context) {
 		if !exists {
 			println("Unknown sesssion!  sessionID: " + session.ID)
 			session.Save()
-			ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport": c_host, })
+			ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport":  env.S_host(), })
 			return
 		}
 
@@ -197,7 +198,7 @@ func Qslinsertp(ctx *gin.Context) {
 		if !exists {
 			println("Unknown sesssion!  sessionID: " + session.ID)
 			session.Save()
-			ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport": c_host, })
+			ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport":  env.S_host(), })
 			return
 		}
 
@@ -263,7 +264,7 @@ func Qsluploads(ctx *gin.Context) {
 	if !exists {
 		println("Unknown sesssion!  sessionID: " + session.ID)
 		session.Save()
-		ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport": c_host, })
+		ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport":  env.S_host(), })
 		return
 	}
 
@@ -276,7 +277,7 @@ func Qsluploads(ctx *gin.Context) {
 		"isLoggedIn": true,
 		"username": user.Username,
 		"email": user.Email,
-		"domainport": c_host,
+		"domainport":  env.S_host() ,
 	})
 
 //	ctx.Redirect(http.StatusSeeOther, "/")
@@ -294,7 +295,7 @@ func Fileselectp(ctx *gin.Context) {
 	if !exists {
 		println("Unknown sesssion!  sessionID: " + session.ID)
 		session.Save()
-		ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport": c_host, })
+		ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport":  env.S_host(), })
 		return
 	}
 
@@ -329,7 +330,7 @@ func Fileuploadp(ctx *gin.Context) {
 	if !exists {
 		println("Unknown sesssion!  sessionID: " + session.ID)
 		session.Save()
-		ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport": c_host, })
+		ctx.HTML(http.StatusOK, "index.html", gin.H{ "domainport":  env.S_host(), })
 		return
 	}
 
