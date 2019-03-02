@@ -76,8 +76,8 @@ $(document).ready(function(){
               tr_text = tr_text +'<td></td>';
               tr_text = tr_text +'<td class="cbu"><input type="checkbox" name="update"></td>';
               tr_text = tr_text +'<td class="cbd"><input type="checkbox" name="delete"></td>';
-              tr_text = tr_text +'<td><label>' + res[item].ID + '    </label></td>';
-              tr_text = tr_text +'<td><input type="text" name="callsign" value="' + res[item].CALLSIGN + '" maxlength="7"></td>';
+              tr_text = tr_text +'<td><input type="text" name="id" value="' + res[item].ID + '" maxlength="5" readonly="readonly" ></td>';
+              tr_text = tr_text +'<td><input type="text" name="callsign" value="' + res[item].CALLSIGN + '" maxlength="8"></td>';
               tr_text = tr_text +'<td><input type="text" name="datetime" value="' + res[item].DATETIME + ' "maxlength="30"></td>';
               tr_text = tr_text +'<td><input type="text" name="files" value="' + res[item].FILES + '" maxlength="40"></td>';
               tr_text = tr_text + '</tr>';
@@ -148,7 +148,7 @@ $(document).ready(function(){
             if ($(this).find('input[name="delete"]').prop('checked')) {
               var s_wk = new Object();
               s_wk.mode = "D";
-              s_wk.id = $(this).find('input[name="id"]').val();
+              s_wk.idno = $(this).find('input[name="id"]').val();
               s_wk.callsign = $(this).find('input[name="callsign"]').val();
               s_wk.datetime = $(this).find('input[name="datetime"]').val();
               s_wk.files = $(this).find('input[name="files"]').val();
@@ -159,7 +159,7 @@ $(document).ready(function(){
             if ($(this).find('input[name="update"]').prop('checked')) {
               var s_wk = new Object();
               s_wk.mode = "U";
-              s_wk.id = $(this).find('input[name="id"]').val();
+              s_wk.idno = $(this).find('input[name="id"]').val();
               s_wk.callsign = $(this).find('input[name="callsign"]').val();
               s_wk.datetime = $(this).find('input[name="datetime"]').val();
               s_wk.files = $(this).find('input[name="files"]').val();
@@ -212,7 +212,7 @@ $(document).ready(function(){
               if ($(this).find('input[name="insert"]').prop('checked')) {
                   var s_wk = new Object();
                   s_wk.mode = "I";
-                  s_wk.id = $(this).find('input[name="id"]').val();
+                  s_wk.idno = $(this).find('input[name="id"]').val();
                   s_wk.callsign = $(this).find('input[name="callsign"]').val();
                   s_wk.datetime = $(this).find('input[name="datetime"]').val();
                   s_wk.files = $(this).find('input[name="files"]').val();

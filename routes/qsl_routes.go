@@ -148,10 +148,13 @@ func Qslupddelp(ctx *gin.Context) {
 			}
 
 			for _ , p := range rec {
-	//			log.Printf("%d  %s %s %s %s %s \n", idx,
- 	//						p.(map[string]interface{})["mode"].(string),p.(map[string]interface{})["id"].(string), p.(map[string]interface{})["callsign"].(string), p.(map[string]interface{})["datetime"].(string), p.(map[string]interface{})["files"].(string) )
+//				log.Printf(" E %v \n", p)
+//				log.Printf("%d  %s %s %s %s %s \n", idx,
+ //							p.(map[string]interface{})["mode"].(string),p.(map[string]interface{})["id"].(string), p.(map[string]interface{})["callsign"].(string), p.(map[string]interface{})["datetime"].(string), p.(map[string]interface{})["files"].(string) )
 
-						rec2 = append(rec2,Rec{p.(map[string]interface{})["mode"].(string),p.(map[string]interface{})["id"].(string), p.(map[string]interface{})["callsign"].(string), p.(map[string]interface{})["datetime"].(string), p.(map[string]interface{})["files"].(string)})
+					wkr := Rec{p.(map[string]interface{})["mode"].(string), p.(map[string]interface{})["idno"].(string),  p.(map[string]interface{})["callsign"].(string), p.(map[string]interface{})["datetime"].(string),  p.(map[string]interface{})["files"].(string) }
+
+						rec2 = append(rec2, wkr)
 
 			}
 
@@ -226,7 +229,7 @@ func Qslinsertp(ctx *gin.Context) {
 //			log.Printf("%d  %s %s %s %s %s \n", idx,
 //						p.(map[string]interface{})["mode"].(string),p.(map[string]interface{})["id"].(string), p.(map[string]interface{})["callsign"].(string), p.(map[string]interface{})["datetime"].(string), p.(map[string]interface{})["files"].(string) )
 
-					rec2 = append(rec2,Rec{p.(map[string]interface{})["mode"].(string),p.(map[string]interface{})["id"].(string), p.(map[string]interface{})["callsign"].(string), p.(map[string]interface{})["datetime"].(string), p.(map[string]interface{})["files"].(string)})
+					rec2 = append(rec2,Rec{p.(map[string]interface{})["mode"].(string),p.(map[string]interface{})["idno"].(string), p.(map[string]interface{})["callsign"].(string), p.(map[string]interface{})["datetime"].(string), p.(map[string]interface{})["files"].(string)})
 
 		}
 

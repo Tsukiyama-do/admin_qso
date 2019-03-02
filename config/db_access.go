@@ -171,7 +171,7 @@ func (qsl *QslCardsModel) QSLRecords() (S_QSLCARDS, error) {
 	defer db.Close()
 
 	//データの検索
-	 rows, err := db.Query("SELECT * FROM QSLCARDS ORDER BY ID")
+	 rows, err := db.Query("SELECT ID, CALLSIGN, DATETIME, FILES  FROM QSLCARDS ORDER BY ID")
 	 if err != nil { return nil,  err }   // エラー時は、エラーを返却して抜ける
 	 defer rows.Close()
 
@@ -207,7 +207,7 @@ func (qsl *QslCardsModel) QSLUpdate() error {
 
 	// SQL UPDATE proc
   res, err := db.Exec(
-    `UPDATE QSLCARDS SET CALLSIGN=? , DATETIME=?, FILES=? WHERE ID=?`,
+    `UPDATE QSLCARDS SET CALLSIGN=? , DATETIME=datetime( ? ), FILES=? WHERE ID=?`,
      qsl.CALLSIGN,qsl.DATETIME,qsl.FILES,qsl.ID )
 	if err != nil { return  err }   // エラー時は、エラーを返却して抜ける
 
@@ -272,7 +272,7 @@ func (qsl *QslCardsModel) QSLInsert() error {
 
 	// SQL UPDATE proc
   res, err := db.Exec(
-    `INSERT INTO QSLCARDS VALUES (?, ?, ?, ?)`,
+    `INSERT INTO QSLCARDS VALUES (?, ?, datetime( ? ), ?)`,
      qsl.ID, qsl.CALLSIGN,qsl.DATETIME,qsl.FILES )
 	if err != nil { return  err }   // エラー時は、エラーを返却して抜ける
 
