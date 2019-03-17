@@ -70,7 +70,11 @@ func Qslselectp(ctx *gin.Context) {
 		}
 
 		user = buffer.(*config.DummyUserModel)
+
 //		println("Session/User is OK, seID: " + session.ID + " , username: " + user.Username)
+
+		if user.Username == "" {
+		}
 
 		// Initial step : End To confirm sessions
 		// Retrieval step : To get records and convert them to JSON
@@ -125,6 +129,8 @@ func Qslupddelp(ctx *gin.Context) {
 
 		user = buffer.(*config.DummyUserModel)
 //		println("Session/User is OK, seID: " + session.ID + " , username: " + user.Username)
+		if user.Username == "" {
+		}
 
 		// Initial step : End To confirm sessions
 		// Parsing step : To get records and convert them to JSON
@@ -207,6 +213,8 @@ func Qslinsertp(ctx *gin.Context) {
 
 		user = buffer.(*config.DummyUserModel)
 //		println("Session/User is OK, seID: " + session.ID + " , username: " + user.Username)
+		if user.Username == "" {
+		}
 
 		// Initial step : End To confirm sessions
 		// Parsing step : To get records and convert them to JSON
@@ -273,6 +281,8 @@ func Qsluploads(ctx *gin.Context) {
 
 	user = buffer.(*config.DummyUserModel)
 //	println("Session/User is OK, seID: " + session.ID + " , username: " + user.Username)
+	if user.Username == "" {
+	}
 
 	// Initial step : End To confirm sessions
 
@@ -304,6 +314,8 @@ func Fileselectp(ctx *gin.Context) {
 
 	user = buffer.(*config.DummyUserModel)
 //	println("Session/User is OK, seID: " + session.ID + " , username: " + user.Username)
+	if user.Username == "" {
+	}
 
 	// Initial step : End To confirm sessions
 	// Retrieval step : To get file name list and convert them to JSON
@@ -339,6 +351,8 @@ func Fileuploadp(ctx *gin.Context) {
 
 	user = buffer.(*config.DummyUserModel)
 //	println("Session/User is OK, seID: " + session.ID + " , username: " + user.Username)
+	if user.Username == "" {
+	}
 
 	// Initial step : End To confirm sessions
 	// uploaded file handling

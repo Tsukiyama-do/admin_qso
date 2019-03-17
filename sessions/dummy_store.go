@@ -8,7 +8,7 @@ import (
 
 	"errors"
 	"net/http"
-	"fmt"
+//	"fmt"
 )
 
 type DummyStore struct {
