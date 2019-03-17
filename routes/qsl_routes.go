@@ -20,7 +20,7 @@ import (
 //	"bytes"
 )
 
-const up_path string = "../qso/uploads/"
+const up_path string = "../qso/downloads/"
 
 
 func Qslmain(ctx *gin.Context) {
